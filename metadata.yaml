@@ -1,5 +1,5 @@
 homepage: "https://www.getwarmai.com"
 documentation: "https://docs.getwarmai.com/tracking/gtm"
 versions:
-  - sha: 48539db9eb90cf64350c6eaca966339d12719ad4
+  - sha: 6b06e2dd9e74e20271a106c689aa85a70beb1ae0
     changeNotes: Initial release - Page view tracking with session management, scroll depth, and duration tracking.
