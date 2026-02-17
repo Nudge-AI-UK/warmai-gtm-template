@@ -1,0 +1,5 @@
+homepage: "https://www.getwarmai.com"
+documentation: "https://docs.getwarmai.com/tracking/gtm"
+versions:
+  - sha: REPLACE_WITH_COMMIT_SHA
+    changeNotes: Initial release - Page view tracking with session management, scroll depth, and duration tracking.
