@@ -167,7 +167,8 @@ function getPageDuration() {
   if (!data.trackDuration) return 0;
   const startTime = localStorage.getItem('warm_page_start');
   if (!startTime) return 0;
-  return Math.round((getTimestampMillis() - startTime) / 1000);
+  const durationMs = getTimestampMillis() - startTime;
+  return ~~(durationMs / 1000);
 }
 
 // Build tracking URL with all parameters
