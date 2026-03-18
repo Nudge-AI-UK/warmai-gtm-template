@@ -1,5 +1,7 @@
 homepage: "https://www.getwarmai.com"
 documentation: "https://docs.getwarmai.com/tracking/gtm"
 versions:
+  - sha: 79663adf325d447e452d0a6a5d21479cecba858c
+    changeNotes: Update tracking endpoint to track.getwarmai.com for reliable Cloudflare Worker routing. Added permission for new subdomain.
   - sha: 42b71c181b093973b1e4ea1e040fd0a29f384d55
     changeNotes: Initial release - Page view tracking with session management, scroll depth, and duration tracking.
