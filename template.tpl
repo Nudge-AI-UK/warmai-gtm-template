@@ -120,7 +120,7 @@ const localStorage = require('localStorage');
 const log = require('logToConsole');
 
 // Configuration
-const TRACKING_ENDPOINT = data.customEndpoint || 'https://www.getwarmai.com/api/gtm-track';
+const TRACKING_ENDPOINT = data.customEndpoint || 'https://track.getwarmai.com/api/gtm-track';
 const SESSION_COOKIE = 'warm_session';
 const SESSION_TIMEOUT = (data.sessionTimeout || 30) * 60 * 1000; // Convert to ms
 
@@ -246,6 +246,10 @@ ___WEB_PERMISSIONS___
           "value": {
             "type": 2,
             "listItem": [
+              {
+                "type": 1,
+                "string": "https://track.getwarmai.com/*"
+              },
               {
                 "type": 1,
                 "string": "https://www.getwarmai.com/*"
