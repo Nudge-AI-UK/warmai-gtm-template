@@ -1,91 +1,77 @@
-# Warm AI - Website Visitor Analytics Template for Google Tag Manager
+# Warm AI template for Google Tag Manager
 
-Track website visitors and their engagement to identify your most engaged B2B prospects.
+Loads the Warm AI tracker through GTM. Feature-identical to pasting the direct
+script into your site's `<head>`.
 
-## Features
+## Install
 
-- **Page View Tracking**: Capture every page visit with full URL and referrer data
-- **Session Management**: Automatic session handling with configurable timeout
-- **Scroll Depth Tracking**: Monitor how far visitors scroll (0-100%)
-- **Duration Tracking**: Track time spent on each page
-- **Privacy-First**: No PII collection, GDPR-compliant design
+This template is **not** in the Community Template Gallery. Import it by hand:
 
-## Installation
+1. Download [`template.tpl`](template.tpl) from this repository.
+2. In Google Tag Manager, go to **Templates** > **Template Gallery** panel >
+   **New**, then the three-dot menu > **Import**.
+3. Select the downloaded `template.tpl` and save.
+4. Create a tag from the template, paste your **Tracking ID**, and set the
+   trigger to **All Pages**. Fire it as early as you can.
+5. Submit and publish the container.
 
-### From Google Tag Manager Template Gallery
+Your Tracking ID is a UUID from your Warm AI dashboard, under **Websites**. It
+is tied to one domain, subdomains included.
 
-1. In Google Tag Manager, go to **Templates** > **Search Gallery**
-2. Search for "Warm AI"
-3. Click **Add to workspace**
-4. Create a new tag using the Warm AI template
+## What it does
 
-### Manual Installation
+The template injects your per-domain tracker:
 
-1. Download `template.tpl` from this repository
-2. In Google Tag Manager, go to **Templates** > **New**
-3. Click the three-dot menu > **Import**
-4. Select the downloaded `template.tpl` file
-5. Save the template
+```
+https://cdn.menoinfra.com/p/<tracking id>.js
+```
 
-## Configuration
+That file is assembled per customer at the edge, and the edge is where
+company-level tracking and person-level identification are attached. So the
+template only has to inject one URL, and a GTM install stays in step with a
+direct install through any future change to what the tracker carries.
 
-### Required Settings
+Everything else lives in the tracker: session handling, storage, SPA route
+changes, and consent detection (Cookiebot, OneTrust, Transcend, CookieYes,
+Klaro and GTM consent mode). There is nothing to configure here, and no second
+consent check to add.
 
-| Setting | Description |
-|---------|-------------|
-| **Tracking ID** | Your Warm AI Tracking ID (found in Dashboard > Settings > Tracking Code) |
-| **Event Type** | Select "Page View" for most triggers |
+## Settings
 
-### Optional Settings
+| Setting | Required | Notes |
+|---|---|---|
+| Tracking ID | Yes | UUID from your dashboard |
+| Script host | No | Only if Warm AI gave you a branded tracking host. You must also add that host to the template's *Injects Scripts* permission, or the tag will fail to fire. |
 
-| Setting | Default | Description |
-|---------|---------|-------------|
-| **Track Scroll Depth** | Enabled | Monitor scroll percentage |
-| **Track Page Duration** | Enabled | Track time on page |
-| **Session Timeout** | 30 min | Inactivity timeout before new session |
-| **Custom Endpoint** | - | Override default tracking URL |
+## Permissions
 
-## Recommended Trigger Setup
+One: **Injects Scripts**, limited to `https://cdn.menoinfra.com/`.
 
-### All Page Views
-Create a trigger:
-- **Trigger Type**: Page View
-- **This trigger fires on**: All Page Views
+The template reads and writes nothing in the browser. No cookies, no local
+storage, no page content.
 
-### Single Page Applications (SPA)
-For React, Vue, Angular apps, also create:
-- **Trigger Type**: History Change
-- **This trigger fires on**: All History Changes
+## Privacy and compliance
 
-## Data Collected
+The tracker, not this template, determines what is collected and how consent is
+handled. Those are documented in one place so they cannot drift:
 
-| Parameter | Description |
-|-----------|-------------|
-| `tid` | Your Tracking ID |
-| `et` | Event type (page_view, session_start) |
-| `st` | Session token |
-| `url` | Full page URL |
-| `path` | Page path |
-| `host` | Domain name |
-| `ref` | Referrer URL |
-| `ts` | Timestamp |
-| `sd` | Scroll depth (0-100) |
-| `dur` | Page duration (seconds) |
+- [Tracker privacy and compliance](https://docs.warmai.uk/legal/tracker)
+- [Cookies and consent](https://docs.warmai.uk/guides/compliance)
 
-## Privacy & Compliance
+Read those before going live, particularly if you serve EU, EEA or UK visitors.
 
-- No personally identifiable information (PII) is collected
-- Session tokens are randomly generated, not fingerprints
-- All data is transmitted securely via HTTPS
-- Compatible with cookie consent management platforms
-- GDPR and CCPA compliant
+## Upgrading from v1
+
+v1 posted its own event payload to `track.getwarmai.com/api/gtm-track`. That
+endpoint returns 404 and the tag records nothing, so a v1 install needs
+replacing rather than leaving in place. Import v2, re-create the tag, and delete
+the old one. See the changelog in `template.tpl` for detail.
 
 ## Support
 
-- **Documentation**: https://docs.getwarmai.com/tracking/gtm
-- **Support**: support@getwarmai.com
-- **Website**: https://www.getwarmai.com
+- Install guide: https://docs.warmai.uk/guides/install
+- Support: support@getwarmai.com
 
-## License
+## Licence
 
-Apache License 2.0 - see [LICENSE](LICENSE) file for details.
+Apache 2.0, see [LICENSE](LICENSE).
